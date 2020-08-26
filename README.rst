@@ -13,6 +13,8 @@ To use this library in your ROS package add:
 - A dependency on gl3w_ to your package.xml_
 - find_package(gl3w REQUIRED) and catkin_package(... DEPENDS gl3w) to your CMakeLists.txt_
 
+An example package for using this library is scigl_render_ros_.
+
 Introduction
 ------------
 
@@ -137,3 +139,4 @@ OpenGL_ is a registered trademark of SGI_.
 .. _SGI: http://www.sgi.com/
 .. _package.xml: https://github.com/Tuebel/gl3w_ros/blob/master/package.xml
 .. _CMakeLists.txt: https://github.com/Tuebel/gl3w_ros/blob/master/CMakeLists.txt
+.. _scigl_render_ros: https://gitlab.com/rwth-irt-public/flirt/scigl_render_ros

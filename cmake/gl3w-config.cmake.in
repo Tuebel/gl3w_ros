@@ -1,0 +1,18 @@
+# required by CMakePackageConfigHelpers
+# https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html
+@PACKAGE_INIT@
+
+# forward targets
+include("${CMAKE_CURRENT_LIST_DIR}/gl3w-targets.cmake")
+
+# define INCLUDE_DIRS and LIBRARIES, required for catkin_package
+set_and_check(gl3w_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set(gl3w_LIBRARIES gl3w)
+
+if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.0.2)
+	include(CMakeFindDependencyMacro)
+	find_dependency(OpenGL REQUIRED)
+endif()
+
+check_required_components(gl3w)
+

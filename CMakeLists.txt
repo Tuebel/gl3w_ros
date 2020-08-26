@@ -1,7 +1,10 @@
+include(CMakePackageConfigHelpers)
+
 cmake_minimum_required(VERSION 3.1.3 FATAL_ERROR)
 
 project(gl3w)
 
+set(GL3W_VERSION 0.1.0)
 set(CMAKE_VERBOSE_MAKEFILE false)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) # -fPIC
 
@@ -92,15 +95,23 @@ set(MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(BUILD_CMAKE_DIR "${CMAKE_CURRENT_BINARY_DIR}/cmake")
 
 # export targets for remote projects (i.e. make find_package(gl3w) work)
-configure_file(
-	"${MODULE_PATH}/${PROJECT_NAME}-config.cmake"
-	"${BUILD_CMAKE_DIR}/${PROJECT_NAME}-config.cmake"
-	COPYONLY
-)
+write_basic_package_version_file(
+  ${BUILD_CMAKE_DIR}/${CMAKE_PROJECT_NAME}-config-version.cmake
+  VERSION ${GL3W_VERSION}
+  COMPATIBILITY SameMajorVersion)
+
+set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+configure_package_config_file(
+  ${MODULE_PATH}/${PROJECT_NAME}-config.cmake.in
+  ${BUILD_CMAKE_DIR}/${PROJECT_NAME}-config.cmake
+  INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}
+  PATH_VARS INCLUDE_INSTALL_DIR)
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}-targets)
 
-install(FILES "${MODULE_PATH}/${PROJECT_NAME}-config.cmake"
+install(FILES 
+	${BUILD_CMAKE_DIR}/${CMAKE_PROJECT_NAME}-config-version.cmake
+	${BUILD_CMAKE_DIR}/${PROJECT_NAME}-config.cmake
 	DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
 install(EXPORT ${PROJECT_NAME}-targets
 	DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})

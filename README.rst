@@ -2,6 +2,17 @@
 gl3w: Simple OpenGL core profile loading
 ========================================
 
+ROS wrapper
+-----------
+
+This fork adds compatibility to compile it as part of a catkin workspace.
+A package.xml_ has been added and the CMakeLists.txt_ has been modified to be relocatable.
+
+To use this library in your ROS package add:
+
+- A dependency on gl3w_ to your package.xml_
+- find_package(gl3w REQUIRED) and catkin_package(... DEPENDS gl3w) to your CMakeLists.txt_
+
 Introduction
 ------------
 
@@ -124,3 +135,5 @@ OpenGL_ is a registered trademark of SGI_.
 .. _OpenGL: http://www.opengl.org/
 .. _Khronos: http://www.khronos.org/
 .. _SGI: http://www.sgi.com/
+.. _package.xml: https://github.com/Tuebel/gl3w_ros/blob/master/package.xml
+.. _CMakeLists.txt: https://github.com/Tuebel/gl3w_ros/blob/master/CMakeLists.txt
